@@ -1,4 +1,4 @@
-package andres.learning.CRUD.controller;
+package andres.learning.CRUD.authentication.controller;
 
 import andres.learning.CRUD.authentication.controller.model.ResponseUser;
 import andres.learning.CRUD.authentication.controller.model.database.DataProcessing;

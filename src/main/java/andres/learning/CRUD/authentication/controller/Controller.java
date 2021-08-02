@@ -1,4 +1,4 @@
-package andres.learning.CRUD.controller;
+package andres.learning.CRUD.authentication.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -9,28 +9,32 @@ import java.io.IOException;
 
 @WebServlet(name = "Controller", value = "/Controller")
 public class Controller extends HttpServlet {
-    //I noticed that the pool have to be inside a Servlet
-    //When I try to create inside a  JAVA normal class, it does not work
+    /*I noticed that the pool have to be inside a Servlet
+    When I try to create inside a  JAVA normal class, it does not work
     @Resource(name = "jdbc/users")
-    DataSource connectionPool;
+    DataSource connectionPool;*/
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*PrintWriter output = response.getWriter();
-        output.println("<h1>RESPONSE FROM CONTROLLER</h1>");
-        DbConnection dbConnection = new DbConnection(connectionPool);
-        try {
-            System.out.println(dbConnection.getById(Integer.parseInt(request.getParameter("userId"))).completeUserInformation());
-            System.out.println(dbConnection.getById(Integer.parseInt(request.getParameter("userId"))).userInformation());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("The user not exist");
-        }
-        System.out.println();*/
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+    public boolean checkValidUser(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] requestCookies = request.getCookies();
+        boolean validUser = false;
+        if (!(requestCookies == null)) {
+            for (Cookie cookie : requestCookies) {
+                if (cookie.getName().equals("valid.user")) {
+                    if (cookie.getValue().equals("VALID")) {
+                        validUser = true;
+                    }
+                }
+            }
+        }
+        return validUser;
     }
 }

@@ -1,4 +1,4 @@
-package andres.learning.CRUD.controller;
+package andres.learning.CRUD.authentication.controller;
 
 import andres.learning.CRUD.authentication.controller.model.ResponseUser;
 import andres.learning.CRUD.authentication.controller.model.database.DataProcessing;
@@ -20,22 +20,28 @@ public class Login extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.setContentType("text/html");
-        PrintWriter output = response.getWriter();
-        output.println("<h1>LOGIN SERVLET</h1>");
+        doPost(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        model = new DataProcessing(connectionPool);
-        PrintWriter output = response.getWriter();
-        ResponseUser userToLogin = loginUser(request, response);
-        if(!(userToLogin == null)){
-            output.println(userToLogin);
-        }else{
-            output.println("That User not exist");
-        }
+        Controller controller = new Controller();
+        if (controller.checkValidUser(request, response)) {
+            response.sendRedirect("App"); //Its an client approach to forward
+            //request.getRequestDispatcher("App").forward(request, response);
+        } else {
+            model = new DataProcessing(connectionPool);
+            ResponseUser userToLogin = loginUser(request, response);
+            if (!(userToLogin == null)) {
+                Cookie validUser = new Cookie("valid.user", "VALID");
+                validUser.setMaxAge(600);
+                response.addCookie(validUser);
+                response.sendRedirect("App");
+            } else {
+                response.sendRedirect("SignUp.html");
+            }
 
+        }
     }
 
     private ResponseUser loginUser(HttpServletRequest request, HttpServletResponse response) {
@@ -51,3 +57,4 @@ public class Login extends HttpServlet {
     }
 
 }
+
