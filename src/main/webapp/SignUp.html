@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body style="text-align: center;">
+    <h1>Sign Up</h1>
+    <!--On submit, send the form-data to a file named
+        "ServerRegister.jsp" (to process the input/data)-->
+    <form action="SignUp" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" required="">
+        <br>
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" required="">
+        <br>
+        <label for="username">Username</label>
+        <input type="text" name="username" required="">
+        <br>
+        <label for="password">Password</label>
+        <input type="password" name="password" required="">
+        <br>
+        <label for="country">Country</label>
+        <select name="country">
+            <option>Colombia</option>
+            <option>Mexico</option>
+            <option>Spain</option>
+            <option>EEUU</option>
+        </select>
+        <br><br>
+        <label>Technology</label>
+        <br>
+        <label>JavaScript</label>
+        <input type="radio" name="technology" value="JavaScript">
+        <br>
+        <label>Java</label>
+        <input type="radio" name="technology" value="Java">
+        <br>
+        <label>Python</label>
+        <input type="radio" name="technology" value="Python">
+        <br><br>
+        <input type="submit" name="name">
+        <br>
+    </form>
+</body>
+</html>
